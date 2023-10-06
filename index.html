@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Joe's Hot Dogs</title>
+        <style>
+            body {
+                color:darkgoldenrod;
+            }
+            h1 {
+                font-weight: 800;
+                color: green;
+            }
+        </style>
+
+        <script>
+            DOGPRICE = 3.75;
+            FRYPRICE = 3.00;
+            DRINKPRICE = 2.50;
+
+            //function to round to two decimal places
+            function twoDecimal(num) {
+                rounded = Math.round(num * 100) / 100;
+                rounded += "";
+                if (rounded % 1 == 0) { // whole number
+                    rounded += ".00";
+                } else if (rounded.indexOf(".") == rounded.length - 2) {
+                    rounded += "0"; //case of only one place after decimal
+                }
+
+                return rounded;
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Your Order:</h1>
+        <script>
+            numDogs = prompt("How many hot dogs would you like?");
+            numFries = prompt("How many orders of fries would you like?");
+            numDrinks = prompt("How many drinks would you like?");
+            dogTotal = numDogs * DOGPRICE;
+            fryTotal = numFries * FRYPRICE;
+            drinkTotal = numDrinks * DRINKPRICE;
+
+            // Write the total output
+            document.write("<br/> Number of hot dogs ordered: " + numDogs + 
+                           " which totals to $" + twoDecimal(dogTotal));
+            document.write("<br/> Number of fries ordered: " + numFries + 
+                           " which totals to $" + twoDecimal(fryTotal));
+            document.write("<br/> Number of drinks ordered: " + numDrinks + 
+                           " which totals to $" + twoDecimal(drinkTotal));
+            //subtotal before discount                
+            subtotal = dogTotal + fryTotal + drinkTotal;
+            document.write("<br/> Here is your subtotal before any discounts: "+
+                            "$" + twoDecimal(subtotal));
+            
+            if (subtotal >= 25) {
+                discountAmount = subtotal * .10;
+                document.write("<br/> You have a discount of $" + 
+                               twoDecimal(discountAmount) + " available");
+                subtotal -= discountAmount;
+            }
+            //write new subtotal -- could be same as original
+            document.write("<br/> Your subtotal after all discounts is $" + 
+                            twoDecimal(subtotal));
+
+            
+            taxAmount = subtotal * .0625;
+            document.write("<br/> The tax amount is: $" + twoDecimal(taxAmount))
+            final = subtotal + taxAmount;
+            document.write("<br/> Final Total: $" + twoDecimal(final));
+
+        </script>
+    </body>
+</html>
